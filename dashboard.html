@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Frost Panel — Dashboard</title>
+
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+
+  <aside class="sidebar">
+
+    <div class="brand">
+      FROST<span>.</span>
+    </div>
+
+    <div class="online">
+      <span></span>
+      SYSTEM ONLINE
+    </div>
+
+    <nav>
+      <a class="active" href="dashboard.html">⌂ Dashboard</a>
+      <a href="#">▣ Servers</a>
+      <a href="#">◉ Console</a>
+      <a href="#">▤ Files</a>
+      <a href="#">⚙ Settings</a>
+    </nav>
+
+    <div class="user">
+      <div class="avatar">T</div>
+
+      <div>
+        <strong>Takue</strong>
+        <small>Administrator</small>
+      </div>
+    </div>
+
+  </aside>
+
+
+  <main class="main">
+
+    <header class="topbar">
+
+      <div>
+        <small>CONTROL PANEL</small>
+        <h1>Dashboard</h1>
+      </div>
+
+      <button onclick="createServer()">
+        + Create Server
+      </button>
+
+    </header>
+
+
+    <section class="stats">
+
+      <div class="stat">
+        <small>SERVERS</small>
+        <h2>3</h2>
+        <p>Active servers</p>
+      </div>
+
+      <div class="stat">
+        <small>CPU USAGE</small>
+        <h2>24%</h2>
+        <p>Across all servers</p>
+      </div>
+
+      <div class="stat">
+        <small>MEMORY</small>
+        <h2>3.8 GB</h2>
+        <p>Of 16 GB</p>
+      </div>
+
+      <div class="stat">
+        <small>STORAGE</small>
+        <h2>42 GB</h2>
+        <p>Of 100 GB</p>
+      </div>
+
+    </section>
+
+
+    <section class="servers">
+
+      <div class="section-head">
+        <div>
+          <small>YOUR SERVERS</small>
+          <h2>Servers</h2>
+        </div>
+
+        <button class="refresh" onclick="refreshStats()">
+          ↻ Refresh
+        </button>
+      </div>
+
+
+      <div class="server">
+
+        <div class="server-name">
+
+          <div class="server-icon">
+            F
+          </div>
+
+          <div>
+            <h3>Frost Bot</h3>
+            <p>Node 1 · Node.js</p>
+          </div>
+
+        </div>
+
+
+        <div class="state online-state">
+          <span></span>
+          Online
+        </div>
+
+
+        <div class="resource">
+          <small>CPU</small>
+          <strong>12%</strong>
+        </div>
+
+
+        <div class="resource">
+          <small>RAM</small>
+          <strong>1.2 GB</strong>
+        </div>
+
+
+        <button class="manage" onclick="manageServer('Frost Bot')">
+          Manage →
+        </button>
+
+      </div>
+
+
+      <div class="server">
+
+        <div class="server-name">
+
+          <div class="server-icon purple">
+            D
+          </div>
+
+          <div>
+            <h3>Discord Bot</h3>
+            <p>Node 1 · Node.js</p>
+          </div>
+
+        </div>
+
+
+        <div class="state offline-state">
+          <span></span>
+          Offline
+        </div>
+
+
+        <div class="resource">
+          <small>CPU</small>
+          <strong>0%</strong>
+        </div>
+
+
+        <div class="resource">
+          <small>RAM</small>
+          <strong>0 MB</strong>
+        </div>
+
+
+        <button class="manage" onclick="manageServer('Discord Bot')">
+          Manage →
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <section class="activity">
+
+      <div class="section-head">
+        <div>
+          <small>SYSTEM</small>
+          <h2>Recent Activity</h2>
+        </div>
+      </div>
+
+      <div class="activity-item">
+        <span class="dot"></span>
+        <div>
+          <strong>Frost Bot started</strong>
+          <p>Server is now online</p>
+        </div>
+        <time>2 min ago</time>
+      </div>
+
+      <div class="activity-item">
+        <span class="dot purple-dot"></span>
+        <div>
+          <strong>Discord Bot stopped</strong>
+          <p>Server is offline</p>
+        </div>
+        <time>18 min ago</time>
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <script>
+
+    function createServer() {
+      alert("Create Server\n\nPterodactyl integration will be connected here.");
+    }
+
+
+    function manageServer(name) {
+      alert("Opening " + name + "...");
+    }
+
+
+    function refreshStats() {
+
+      const button = document.querySelector(".refresh");
+
+      button.textContent = "✓ Updated";
+
+      setTimeout(() => {
+        button.textContent = "↻ Refresh";
+      }, 1500);
+
+    }
+
+  </script>
+
+</body>
+  </html>
