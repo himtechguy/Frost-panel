@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Frost Panel — Server</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #05070c;
+      color: #f5f7fa;
+      min-height: 100vh;
+    }
+
+    .top {
+      padding: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      background: #070a10;
+    }
+
+    .back {
+      color: #8b93a1;
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    .back:hover {
+      color: white;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 35px 20px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .title small {
+      color: #36c9ff;
+      font-size: 9px;
+      letter-spacing: 2px;
+    }
+
+    h1 {
+      margin-top: 8px;
+      font-size: 30px;
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #38d996;
+      font-size: 12px;
+    }
+
+    .status span {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #38d996;
+      box-shadow: 0 0 10px #38d996;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 11px 17px;
+      border-radius: 9px;
+      border: 1px solid rgba(255,255,255,0.09);
+      background: #0d111a;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      border-color: #36c9ff;
+    }
+
+    .start {
+      background: #38d996;
+      color: #04100b;
+      border: none;
+    }
+
+    .stop {
+      background: #e95757;
+      border: none;
+    }
+
+    .restart {
+      background: #765cff;
+      border: none;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    .card {
+      background: #0d111a;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 15px;
+      padding: 22px;
+    }
+
+    .card small {
+      color: #7d8491;
+      font-size: 9px;
+      letter-spacing: 1px;
+    }
+
+    .card h2 {
+      margin-top: 12px;
+      font-size: 25px;
+    }
+
+    .card p {
+      margin-top: 7px;
+      color: #666e7c;
+      font-size: 11px;
+    }
+
+    .console {
+      margin-top: 25px;
+      background: #020308;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 15px;
+      overflow: hidden;
+    }
+
+    .console-head {
+      padding: 15px 18px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      color: #8b93a1;
+      font-size: 11px;
+    }
+
+    .terminal {
+      padding: 20px;
+      min-height: 250px;
+      color: #8cf7b9;
+      font-family: monospace;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .terminal .white {
+      color: white;
+    }
+
+    @media (max-width: 700px) {
+      .header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="top">
+    <a class="back" href="dashboard.html">← Back to Dashboard</a>
+  </div>
+
+  <main class="container">
+
+    <div class="header">
+
+      <div class="title">
+        <small>SERVER MANAGEMENT</small>
+        <h1 id="serverName">Frost Bot</h1>
+      </div>
+
+      <div class="status">
+        <span></span>
+        <strong id="statusText">ONLINE</strong>
+      </div>
+
+    </div>
+
+    <div class="actions">
+
+      <button class="start" onclick="startServer()">
+        ▶ Start
+      </button>
+
+      <button class="stop" onclick="stopServer()">
+        ■ Stop
+      </button>
+
+      <button class="restart" onclick="restartServer()">
+        ↻ Restart
+      </button>
+
+      <button onclick="showMessage('Console opened')">
+        🖥 Console
+      </button>
+
+      <button onclick="showMessage('Files opened')">
+        📁 Files
+      </button>
+
+      <button onclick="showMessage('Settings opened')">
+        ⚙ Settings
+      </button>
+
+    </div>
+
+    <section class="grid">
+
+      <div class="card">
+        <small>CPU USAGE</small>
+        <h2 id="cpu">12%</h2>
+        <p>Processor usage</p>
+      </div>
+
+      <div class="card">
+        <small>MEMORY</small>
+        <h2 id="ram">1.2 GB</h2>
+        <p>RAM currently used</p>
+      </div>
+
+      <div class="card">
+        <small>STORAGE</small>
+        <h2>4.8 GB</h2>
+        <p>Server storage</p>
+      </div>
+
+    </section>
+
+    <section class="console">
+
+      <div class="console-head">
+        F
